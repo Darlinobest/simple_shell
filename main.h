@@ -9,9 +9,11 @@
 
 #define MAX_IN_SIZE 1024
 
-void pass_betty();
+void pass_betty(void);
+void display_prompt(void);
+char *read_input();
 int sd_putchar(char c);
 char *_strcpy(char *dest, char *src);
-void execmd(char *argv[]);
+void execute_cmd(char *command);
 
 #endif

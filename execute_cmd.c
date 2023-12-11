@@ -1,13 +1,27 @@
 #include "main.h"
 
-void execmd(char *argv[])
+/**
+ * execute_cmd - execute the various command
+ * @command: command given by the user
+ */
+void execute_cmd(char *command)
 {
-	char *command = NULL;
+	pid_t pid;
 
-	if (argv)
+	command[strcspn(command, "\n")] = '\0';
+
+	pid = fork();
+	if (pid == -1)
+		perror("fork");
+	else if (pid == 0)
 	{
-		command = argv[0];
-		if (execve(command, argv, NULL) == -1)
-			perror("Error:");
-	};
+		if (execlp(command, command, NULL) == -1)
+		{
+			perror("Bash");
+			_exit(EXIT_FAILURE);
+		}
+	} else
+	{
+		waitpid(pid, NULL, 0);
+	}
 }
