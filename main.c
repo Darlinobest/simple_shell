@@ -9,6 +9,7 @@ int main(void)
 {
 	pid_t pid;
 
+
 	pass_betty();
 	while (1)
 	{

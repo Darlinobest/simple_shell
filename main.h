@@ -12,7 +12,6 @@
 
 extern char **environ;
 
-void pass_betty(void);
 void display_prompt(void);
 char *read_input();
 int sd_putchar(char c);
