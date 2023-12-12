@@ -14,6 +14,12 @@ void execute_cmd(char *command)
 	err_message = "Command not found\n";
 	err_mess = "Error running command\n";
 	command[strcspn(command, "\n")] = '\0';
+
+	if (_strcmp(command, "exit") == 0)
+	{
+		write(STDOUT_FILENO, "\nDisconnected\n", sizeof("\nDisconnected\n") - 1);
+		exit(EXIT_SUCCESS);
+	}
 	exec_path = check_cmd(command);
 
 	if (exec_path == NULL)
