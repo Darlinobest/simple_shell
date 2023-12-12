@@ -15,13 +15,16 @@ void execute_cmd(char *command)
 	err_mess = "Error running command\n";
 	command[strcspn(command, "\n")] = '\0';
 
+	if (_strcmp(command, "env") == 0)
+	{
+		execute_env();
+		return;
+	}
 	if (_strcmp(command, "exit") == 0)
 	{
 		write(STDOUT_FILENO, "\nDisconnected\n", sizeof("\nDisconnected\n") - 1);
 		exit(EXIT_SUCCESS);
-	}
-	exec_path = check_cmd(command);
-
+	} exec_path = check_cmd(command);
 	if (exec_path == NULL)
 	{
 		write(STDOUT_FILENO, err_message, strlen(err_message));
@@ -33,9 +36,7 @@ void execute_cmd(char *command)
 	{
 		args[count_args++] = token;
 		token =  strtok(NULL, " ");
-	}
-	args[count_args] = NULL;
-
+	} args[count_args] = NULL;
 	if (execve(exec_path, args, environ) == -1)
 	{
 		write(STDERR_FILENO, err_mess, strlen(err_mess));

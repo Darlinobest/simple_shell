@@ -20,5 +20,6 @@ int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
 char *check_cmd(char *command);
 void execute_cmd(char *command);
+void execute_env(void);
 
 #endif
